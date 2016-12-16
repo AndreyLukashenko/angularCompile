@@ -1,0 +1,45 @@
+<head>
+    <script src="./angular-1.2.28.js"></script>
+    <script src="./app.js"></script>
+</head>
+<body ng-app="app">
+    <script type="text/ng-template" id="include.html">
+        <div child="ng-include"></div>
+    </script>
+
+    <!-- First "child" directive will be compiled, but second one inside ngInclude will NOT -->
+    <div ng-switch="false">
+        <div ng-switch-when="true">
+            <div child="ng-switch"></div>
+            <span ng-include="'include.html'"></span>
+        </div>
+    </div>
+    <div ng-if="false">
+        <div child="ng-if"></div>
+        <span ng-include="'include.html'"></span>
+    </div>
+    <div ng-repeat="entry in []">
+        <div child="ng-repeat"></div>
+        <span ng-include="'include.html'"></span>
+    </div>
+    <div ng-if="false">
+        <div a1></div>
+        <script type="text/ng-template" id="a1.html">
+            <div child="simple directive"></div>
+            <span ng-include="'include.html'"></span>
+        </script>
+    </div>
+    <div b2>
+        <div child="transcluded"></div>
+        <span ng-include="'include.html'"></span>
+    </div>
+    <div c3>
+        <div child="transcluded, terminal"></div>
+        <span ng-include="'include.html'"></span>
+    </div>
+
+    <!-- "child" directive will NOT be compiled -->
+    <div d4 ng-if="false">
+        <div child="terminal"></div>
+    </div>
+</body>
